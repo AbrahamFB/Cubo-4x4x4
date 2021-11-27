@@ -13,6 +13,10 @@ const char *mqtt_pass = "PtsiiKX9xhVm";
 WiFiClient espClient;
 PubSubClient client(espClient);
 
+//LEDS
+int niveles[4] = {13, 12, 14, 27};
+int columnas[16] = {26, 25, 33, 32, 23, 22, 1, 3, 21, 19, 18, 5, 17, 16, 4, 15};
+
 long lastMsg = 0;
 char msg[50];
 int value = 0;
@@ -32,31 +36,46 @@ void callback(char *topix, byte *payload, unsigned int length)
   {
     digitalWrite(BUILTIN_LED, LOW);
     Serial.println("\n Led Apagado");
+
+    for (int i = 0; i < 16; i++)
+    {
+      digitalWrite(columnas[i], 0);
+    }
+    //turning on layers
+    for (int i = 0; i < 4; i++)
+    {
+      digitalWrite(niveles[i], 1);
+    }
   }
   else
   {
     if ((char)payload[0] == '1')
     {
       digitalWrite(BUILTIN_LED, HIGH);
+      patron1();
       Serial.println("\n Patrón 1");
     }
     if ((char)payload[0] == '2')
     {
+      patron2();
       digitalWrite(BUILTIN_LED, HIGH);
       Serial.println("\n Patrón 2");
     }
     if ((char)payload[0] == '3')
     {
+      patron3();
       digitalWrite(BUILTIN_LED, HIGH);
       Serial.println("\n Patrón 3");
     }
     if ((char)payload[0] == '4')
     {
+      patron4();
       digitalWrite(BUILTIN_LED, HIGH);
       Serial.println("\n Patrón 4");
     }
     if ((char)payload[0] == '5')
     {
+      patron5();
       digitalWrite(BUILTIN_LED, HIGH);
       Serial.println("\n Patrón 5");
     }
@@ -120,6 +139,19 @@ void setup_wifi()
 
 void setup()
 {
+  //Se configuran los leds por columnas(16) y niveles(4)
+  for (int i = 0; i < 16; i++)
+  {
+    pinMode(columnas[i], OUTPUT);
+  }
+
+  for (int i = 0; i < 4; i++)
+  {
+    pinMode(niveles[i], OUTPUT);
+  }
+
+  randomSeed(analogRead(10));
+
   pinMode(BUILTIN_LED, OUTPUT);
   Serial.begin(115200);
   setup_wifi();
@@ -144,5 +176,33 @@ void loop()
     mes.toCharArray(msg, 50);
     client.publish("afb1", msg);
     Serial.println("Mensaje enviado -> " + String(value));
+  }
+}
+
+void patron1()
+{
+}
+void patron2()
+{
+}
+void patron3()
+{
+}
+void patron4()
+{
+}
+void patron5()
+{
+}
+void ninguno()
+{
+  for (int i = 0; i < 16; i++)
+  {
+    digitalWrite(columnas[i], 0);
+  }
+  //turning on layers
+  for (int i = 0; i < 4; i++)
+  {
+    digitalWrite(niveles[i], 1);
   }
 }
