@@ -485,7 +485,7 @@ void cubo4x4x4()
 
 void patron1()
 { //OK
-  
+
   for (int o = 0; o < 4; o++)
   {
     for (int j = 12; j < 16; j++)
@@ -906,9 +906,63 @@ void patron4()
 }
 void patron5()
 {
-  for (int i = 0; i < 8; i++)
+  for (int i = 0; i < 4; i++)
   {
+    for (int i = 0; i < 4; i++)
+    {
+      digitalWrite(niveles[i], 1);
+    }
+    for (int y = 0; y < 4; y++)
+    {
+      digitalWrite(niveles[y], 0);
+
+      int esta = 0;
+      int foco = 0;
+      for (int f = 0; f < 2; f++)
+      {
+        if (esta == f)
+        {
+          foco = 0;
+        }
+        else
+        {
+          foco = 1;
+        }
+        digitalWrite(columnas[10], foco);
+        digitalWrite(columnas[0], 1);
+        delay(100);
+
+        digitalWrite(columnas[3], 1);
+        digitalWrite(columnas[0], foco);
+        delay(100);
+
+        digitalWrite(columnas[15], 1);
+        digitalWrite(columnas[3], foco);
+        delay(100);
+
+        digitalWrite(columnas[12], 1);
+        digitalWrite(columnas[15], foco);
+        delay(100);
+
+        digitalWrite(columnas[9], 1);
+        digitalWrite(columnas[12], foco);
+        delay(100);
+
+        digitalWrite(columnas[5], 1);
+        digitalWrite(columnas[9], foco);
+        delay(100);
+
+        digitalWrite(columnas[6], 1);
+        digitalWrite(columnas[5], foco);
+        delay(100);
+
+        digitalWrite(columnas[10], 1);
+        digitalWrite(columnas[6], foco);
+        delay(100);
+      }
+    }
   }
+  todoOn();
 }
 
 void callback(char *topix, byte *payload, unsigned int length)
