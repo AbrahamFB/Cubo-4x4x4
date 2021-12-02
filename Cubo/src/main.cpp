@@ -17,11 +17,11 @@ PubSubClient client(espClient);
 //LEDS
 int niveles[4] = {13, 12, 14, 27};
 int columnas[16] = {32, 33, 25, 26,
-                    1, 4, 2, 15,
+                    16, 4, 2, 15,
                     3, 18, 5, 17,
                     23, 22, 21, 19};
 
-int tiempoD = 100;
+int tiempoD = 100; //lluvia agresiva
 
 long lastMsg = 0;
 char msg[50];
@@ -98,308 +98,11 @@ void encenderFila(int fila)
   digitalWrite(columnas[fila], 1);
 }
 
-void cero()
-{
-
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(niveles[i], 1);
-  }
-  digitalWrite(niveles[0], 0);
-  delay(0);
-
-  digitalWrite(niveles[0], 1);
-  digitalWrite(columnas[0], 0);
-  digitalWrite(columnas[1], 0);
-  digitalWrite(columnas[2], 0);
-  digitalWrite(columnas[3], 0);
-
-  ////////////////
-
-  digitalWrite(columnas[0], 1);
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[1], 0);
-  delay(0);
-
-  digitalWrite(niveles[1], 1);
-  digitalWrite(columnas[0], 0);
-  digitalWrite(columnas[3], 0);
-
-  /////////////////
-
-  digitalWrite(columnas[0], 1);
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[2], 0);
-  delay(0);
-
-  digitalWrite(niveles[2], 1);
-  digitalWrite(columnas[0], 0);
-  digitalWrite(columnas[3], 0);
-
-  ////////////////////////////
-
-  digitalWrite(columnas[0], 1);
-  digitalWrite(columnas[1], 1);
-  digitalWrite(columnas[2], 1);
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[3], 0);
-  delay(0);
-
-  digitalWrite(niveles[3], 1);
-  digitalWrite(columnas[0], 0);
-  digitalWrite(columnas[1], 0);
-  digitalWrite(columnas[2], 0);
-  digitalWrite(columnas[3], 0);
-}
-
-void uno()
-{ //OK
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(niveles[i], 1);
-  }
-
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[0], 0);
-    delay(0);
-
-    digitalWrite(niveles[0], 1);
-    digitalWrite(columnas[i], 0);
-  }
-
-  ///
-  for (int i = 1; i < 3; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[1], 0);
-    delay(0);
-    digitalWrite(niveles[1], 1);
-    digitalWrite(columnas[i], 0);
-  }
-
-  ////////
-
-  for (int i = 0; i < 3; i++)
-  {
-    digitalWrite(columnas[i], 1);
-
-    digitalWrite(niveles[2], 0);
-    delay(0);
-
-    digitalWrite(niveles[2], 1);
-    digitalWrite(columnas[i], 0);
-  }
-  /////////////////////////
-
-  for (int i = 1; i < 3; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[3], 0);
-    delay(0);
-    digitalWrite(niveles[3], 1);
-    digitalWrite(columnas[i], 0);
-  }
-}
-
-void dos()
-{
-
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[0], 0);
-    delay(0);
-
-    digitalWrite(niveles[0], 1);
-    digitalWrite(columnas[i], 0);
-  }
-
-  digitalWrite(columnas[2], 1);
-  digitalWrite(niveles[1], 0);
-  delay(0);
-
-  digitalWrite(niveles[1], 1);
-  digitalWrite(columnas[2], 0);
-
-  digitalWrite(columnas[0], 1);
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[2], 0);
-  delay(0);
-
-  digitalWrite(niveles[2], 1);
-  digitalWrite(columnas[0], 0);
-  digitalWrite(columnas[3], 0);
-
-  ///////////////
-  for (int i = 1; i < 4; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[3], 0);
-    delay(0);
-
-    digitalWrite(niveles[3], 1);
-    digitalWrite(columnas[i], 0);
-  }
-}
-
-void tres()
-{
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(niveles[i], 1);
-  }
-
-  for (int i = 0; i < 3; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[0], 0);
-    delay(0);
-
-    digitalWrite(niveles[0], 1);
-    digitalWrite(columnas[i], 0);
-  }
-
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[1], 0);
-  delay(0);
-
-  digitalWrite(niveles[1], 1);
-  digitalWrite(columnas[3], 0);
-
-  //////////
-  digitalWrite(columnas[2], 1);
-  digitalWrite(niveles[2], 0);
-  delay(0);
-
-  digitalWrite(niveles[2], 1);
-  digitalWrite(columnas[2], 0);
-
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[3], 0);
-    delay(0);
-
-    digitalWrite(niveles[3], 1);
-    digitalWrite(columnas[i], 0);
-  }
-}
-
-void cuatro()
-{
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(niveles[i], 1);
-  }
-
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[0], 0);
-  delay(0);
-
-  digitalWrite(niveles[0], 1);
-  digitalWrite(columnas[3], 0);
-
-  //////////////
-
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[1], 0);
-  delay(0);
-
-  digitalWrite(niveles[1], 1);
-  digitalWrite(columnas[3], 0);
-
-  //////////////////
-
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[2], 0);
-    delay(0);
-
-    digitalWrite(niveles[2], 1);
-    digitalWrite(columnas[i], 0);
-  }
-
-  /////////////////////
-
-  digitalWrite(columnas[0], 1);
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[3], 0);
-  delay(0);
-
-  digitalWrite(niveles[2], 1);
-  digitalWrite(columnas[0], 0);
-  digitalWrite(columnas[3], 0);
-}
-
-void cinco()
-{
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(niveles[i], 1);
-  }
-  for (int i = 0; i < 3; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[0], 0);
-    delay(0);
-
-    digitalWrite(niveles[0], 1);
-    digitalWrite(columnas[i], 0);
-  }
-  /////////////////
-  digitalWrite(columnas[3], 1);
-  digitalWrite(niveles[1], 0);
-  delay(0);
-
-  digitalWrite(niveles[1], 1);
-  digitalWrite(columnas[3], 0);
-
-  ////////////////////////
-
-  for (int i = 0; i < 3; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[2], 0);
-    delay(0);
-
-    digitalWrite(niveles[2], 1);
-    digitalWrite(columnas[i], 0);
-  }
-  ///////////////////
-
-  for (int i = 0; i < 4; i++)
-  {
-    digitalWrite(columnas[i], 1);
-    digitalWrite(niveles[3], 0);
-    delay(0);
-
-    digitalWrite(niveles[3], 1);
-    digitalWrite(columnas[i], 0);
-  }
-}
-
-void numeros()
-{
-  uno();
-  //  ti = millis();
-  //Serial.println(ti);
-  if (millis() > 30000)
-  { // En lugar de 10000, ajusta el valor de pausa que deses
-    //timing = millis();
-    Serial.println("10 segundos");
-    dos();
-  }
-  delay(20);
-}
-
 void cubo2x2()
 { //OK
   digitalWrite(columnas[0], 0);
   digitalWrite(columnas[4], 0);
-  //      digitalWrite(columnas[4], 0);
+
   for (int i = 5; i < 11; i++)
   {
     if (i == 5 || i == 6 || i == 9 || i == 10)
@@ -692,9 +395,10 @@ void patron3()
         if (i == 0)
         {
           digitalWrite(niveles[0], 0);
-          digitalWrite(niveles[1], 1);
-          digitalWrite(niveles[2], 1);
-          digitalWrite(niveles[3], 1);
+          for (int b = 1; b < 4; b++)
+          {
+            digitalWrite(niveles[b], 1);
+          }
         }
         if (i == 1)
         {
@@ -724,7 +428,7 @@ void patron3()
       {
         tiempoD = 100;
       }
-      Serial.println(tiempoD);
+      //Serial.println(tiempoD);
       digitalWrite(columnas[numColumna1], 0);
       digitalWrite(columnas[numColumna2], 0);
       digitalWrite(columnas[numColumna3], 0);
@@ -749,9 +453,10 @@ void patron3()
         if (i == 0)
         {
           digitalWrite(niveles[0], 0);
-          digitalWrite(niveles[1], 1);
-          digitalWrite(niveles[2], 1);
-          digitalWrite(niveles[3], 1);
+          for (int a = 1; a < 4; a++)
+          {
+            digitalWrite(niveles[a], 1);
+          }
         }
         if (i == 1)
         {
@@ -769,9 +474,11 @@ void patron3()
         }
         if (i == 3)
         {
-          digitalWrite(niveles[0], 1);
-          digitalWrite(niveles[1], 1);
-          digitalWrite(niveles[2], 1);
+          for (int p = 0; p < 3; p++)
+          {
+            digitalWrite(niveles[p], 1);
+          }
+
           digitalWrite(niveles[3], 0);
         }
         delay(tiempoD);
@@ -781,7 +488,7 @@ void patron3()
       {
         tiempoD = 100;
       }
-      Serial.println(tiempoD);
+      //Serial.println(tiempoD);
       digitalWrite(columnas[numColumna1], 0);
       digitalWrite(columnas[numColumna2], 0);
       digitalWrite(columnas[numColumna3], 0);
@@ -908,9 +615,9 @@ void patron5()
 {
   for (int i = 0; i < 4; i++)
   {
-    for (int i = 0; i < 4; i++)
+    for (int w = 0; w < 4; w++)
     {
-      digitalWrite(niveles[i], 1);
+      digitalWrite(niveles[w], 1);
     }
     for (int y = 0; y < 4; y++)
     {
@@ -967,19 +674,19 @@ void patron5()
 
 void callback(char *topix, byte *payload, unsigned int length)
 {
-  Serial.print("Mensaje recibido bajo el tópico-> ");
-  Serial.print(topix);
-  Serial.print("\n");
+  //Serial.println("Mensaje recibido bajo el tópico-> ");
+  //Serial.println(topix);
+  //Serial.println("\n");
 
   for (int i = 0; i < length; i++)
   {
-    Serial.print((char)payload[i]);
+    //Serial.println((char)payload[i]);
   }
 
   if ((char)payload[0] == '0')
   {
     //digitalWrite(BUILTIN_LED, LOW);
-    Serial.println("\n Led Apagado");
+    //Serial.println("\n Led Apagado");
     ninguno();
     // for (int i = 0; i < 16; i++)
     // {
@@ -997,35 +704,35 @@ void callback(char *topix, byte *payload, unsigned int length)
     {
       //digitalWrite(BUILTIN_LED, HIGH);
       patron1();
-      Serial.println("\n Patrón 1");
+      //  Serial.println("\n Patrón 1");
     }
     if ((char)payload[0] == '2')
     {
       patron2();
       //digitalWrite(BUILTIN_LED, HIGH);
-      Serial.println("\n Patrón 2");
+      // Serial.println("\n Patrón 2");
     }
     if ((char)payload[0] == '3')
     {
       patron3();
       //digitalWrite(BUILTIN_LED, HIGH);
-      Serial.println("\n Patrón 3");
+      //  Serial.println("\n Patrón 3");
     }
     if ((char)payload[0] == '4')
     {
       patron4();
       // digitalWrite(BUILTIN_LED, HIGH);
-      Serial.println("\n Patrón 4");
+      //  Serial.println("\n Patrón 4");
     }
     if ((char)payload[0] == '5')
     {
       patron5();
       //digitalWrite(BUILTIN_LED, HIGH);
-      Serial.println("\n Patrón 5");
+      //  Serial.println("\n Patrón 5");
     }
   }
 
-  Serial.println();
+  //  Serial.println();
 }
 
 void reconnect()
@@ -1039,15 +746,15 @@ void reconnect()
 
     if (client.connect(clientId.c_str(), mqtt_user, mqtt_pass))
     {
-      Serial.println("Conexión a MQTT exitosa!!");
+      // Serial.println("Conexión a MQTT exitosa!!");
       client.publish("afb", "primer mensaje");
       client.subscribe("afb1");
     }
     else
     {
-      Serial.println("Falló la conexión ");
-      Serial.print(client.state());
-      Serial.print(" Se intentará de nuevo en 5 segundos");
+      // Serial.println("Falló la conexión ");
+      //Serial.println(client.state());
+      //Serial.println(" Se intentará de nuevo en 5 segundos");
       delay(5000);
     }
   }
@@ -1056,29 +763,29 @@ void reconnect()
 void setup_wifi()
 {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  //Serial.begin(115200);
   delay(10);
 
-  Serial.println("");
-  Serial.println("");
+  //Serial.println("");
+  // Serial.println("");
 
-  Serial.println("Conectado a -> ");
-  Serial.println(ssid);
+  //Serial.println("Conectado a -> ");
+  // Serial.println(ssid);
 
   //Me conecto a la red WiFi
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED)
   {
-    Serial.println(".");
+    // Serial.println(".");
     delay(250);
   }
 
-  Serial.println("");
-  Serial.println("Conexión Exitosa!");
+  //Serial.println("");
+  //Serial.println("Conexión Exitosa!");
 
-  Serial.println("Mi ip es -> ");
-  Serial.println(WiFi.localIP());
+  //Serial.println("Mi ip es -> ");
+  //Serial.println(WiFi.localIP());
 }
 
 void setup()
@@ -1095,8 +802,8 @@ void setup()
 
   randomSeed(analogRead(10));
 
-  pinMode(BUILTIN_LED, OUTPUT);
-  Serial.begin(115200);
+  //pinMode(BUILTIN_LED, OUTPUT);
+  //Serial.begin(115200);
   setup_wifi();
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
@@ -1119,6 +826,6 @@ void loop()
     String mes = "Tiempo: " + String(value) + "s"; // El mensaje a publicar será el contenido de la variable
     mes.toCharArray(msg, 50);
     client.publish("afb1", msg);
-    Serial.println("Mensaje enviado -> " + String(value));
+    //Serial.println("Mensaje enviado -> " + String(value));
   }
 }
